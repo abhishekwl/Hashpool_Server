@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const productSchema = {
+const productSchema = mongoose.Schema({
     name: { type: String, required: true, default: null },
     price: { type: Number, required: true, default: -1 },
     image: { type: String, required: false, default: null }
-};
+});
 
 const categorySchema = mongoose.Schema({
     store_id: { type: mongoose.Schema.Types.ObjectId, ref: 'store', required: true, default: null },

@@ -25,4 +25,5 @@ app.get('/', (request, response) => global.sendResponse(null, 'All requests shou
 
 require('./app/routes/user.routes')(app);
 require('./app/routes/store.routes')(app);
+require('./app/routes/category.routes')(app);
 app.listen(PORT, '0.0.0.0', () => console.log('[SERVER] Listening on port '+PORT));
