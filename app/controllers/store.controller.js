@@ -1,4 +1,5 @@
 const StoreModel = require('../models/store.model');
+const OrderModel = require('../models/order.model');
 
 exports.createStore = (request, response) => {
     const store = new StoreModel({
