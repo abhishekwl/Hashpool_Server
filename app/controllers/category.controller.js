@@ -11,9 +11,11 @@ exports.createCategory = (request, response) => {
 
 exports.getAllCategories = (request, response) => CategoryModel.find({}, (err, data) => global.sendResponse(err, data, request, response));
 
+exports.getCategoriesOfStore = (request, response) => CategoryModel.find({ store_id: request.params._id }, (err, data) => global.sendResponse(err, data, request, response));
+
 exports.getCategory = (request, response) => CategoryModel.findById(request.params._id, (err, data) => global.sendResponse(err, data, request, response));
 
-exports.updateCategoryName = (request, response) => CategoryModel.findById(request.params._id, {$set: { name: request.body.name } }, { new: true, runValidators: true }, (err, data) => global.sendResponse(err, data, request, response));
+exports.updateCategoryName = (request, response) => CategoryModel.findByIdAndUpdate(request.params._id, {$set: { name: request.body.name } }, { new: true, runValidators: true }, (err, data) => global.sendResponse(err, data, request, response));
 
 exports.addProductToCategory = (request, response) => {
     const product = { name: request.body.name, price: request.body.price, image: request.body.image };
@@ -36,7 +38,7 @@ exports.deleteProductFromCategory = (request, response) =>
 exports.updateProductInCategory = (request, response) =>
     CategoryModel.findOneAndUpdate(
         { _id: request.params._id, 'products._id': request.query.product_id },
-        { $set: { 'products.$.name': request.body.name, 'products.$.price': request.body.price, 'products.$.image': request.body.image } },
+        { $set: { 'products.$': request.body } },
         { new: true, runValidators: true },
         (err, data) => global.sendResponse(err, data, request, response)
     );
