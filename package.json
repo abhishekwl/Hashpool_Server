@@ -1,0 +1,27 @@
+{
+  "name": "hashpool_server",
+  "version": "1.0.0",
+  "description": "REST API for a B2B product developed for Big Bazaar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishekwl/Hashpool_server.git"
+  },
+  "author": "abhishekwl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhishekwl/Hashpool_server/issues"
+  },
+  "homepage": "https://github.com/abhishekwl/Hashpool_server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.19.0",
+    "mongoose": "^5.6.6",
+    "morgan": "^1.9.1"
+  }
+}
