@@ -1,2 +1,2 @@
 # Hashpool_server
-REST API for a B2B product developed for Big Bazaar
+REST API for a B2B product
