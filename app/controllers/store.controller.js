@@ -1,5 +1,5 @@
+const { sendResponse } = require('../util');
 const StoreModel = require('../models/store.model');
-const OrderModel = require('../models/order.model');
 
 exports.createStore = (request, response) => {
     const store = new StoreModel({
@@ -7,13 +7,13 @@ exports.createStore = (request, response) => {
         name: request.body.name,
         email: request.body.email
     });
-    store.save((err, data) => global.sendResponse(err, data, request, response));
+    store.save((err, data) => sendResponse(err, data, request, response));
 };
 
-exports.getAllStores = (request, response) => StoreModel.find({}, (err, data) => global.sendResponse(err, data, request, response));
+exports.getAllStores = (request, response) => StoreModel.find({}, (err, data) => sendResponse(err, data, request, response));
 
-exports.getStore = (request, response) => StoreModel.findById(request.params._id, (err, data) => global.sendResponse(err, data, request, response));
+exports.getStore = (request, response) => StoreModel.findById(request.params._id, (err, data) => sendResponse(err, data, request, response));
 
-exports.updateStore = (request, response) => StoreModel.findByIdAndUpdate(request.params._id, { $set: request.body }, { new: true, runValidators: true }, (err, data) => global.sendResponse(err, data, request, response));
+exports.updateStore = (request, response) => StoreModel.findByIdAndUpdate(request.params._id, { $set: request.body }, { new: true, runValidators: true }, (err, data) => sendResponse(err, data, request, response));
 
-exports.deleteStore = (request, response) => StoreModel.findByIdAndDelete(request.params._id, (err, data) => global.sendResponse(err, data, request, response));
+exports.deleteStore = (request, response) => StoreModel.findByIdAndDelete(request.params._id, (err, data) => sendResponse(err, data, request, response));

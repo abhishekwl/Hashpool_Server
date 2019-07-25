@@ -1,3 +1,4 @@
+const { sendResponse } = require('../util');
 const UserModel = require('../models/user.model');
 
 exports.createUser = (request, response) => {
@@ -6,13 +7,13 @@ exports.createUser = (request, response) => {
         name: request.body.name,
         email: request.body.email
     });
-    user.save((err, data) => global.sendResponse(err, data, request, response));
+    user.save((err, data) => sendResponse(err, data, request, response));
 };
 
-exports.getAllUsers = (request, response) => UserModel.find({}, (err, data) => global.sendResponse(err, data, request, response));
+exports.getAllUsers = (request, response) => UserModel.find({}, (err, data) => sendResponse(err, data, request, response));
 
-exports.getUser = (request, response) => UserModel.findById(request.params._id, (err, data) => global.sendResponse(err, data, request, response));
+exports.getUser = (request, response) => UserModel.findById(request.params._id, (err, data) => sendResponse(err, data, request, response));
 
-exports.updateUser = (request, response) => UserModel.findByIdAndUpdate(request.params._id, { $set: request.body }, { new: true, runValidators: true }, (err, data) => global.sendResponse(err, data, request, response));
+exports.updateUser = (request, response) => UserModel.findByIdAndUpdate(request.params._id, { $set: request.body }, { new: true, runValidators: true }, (err, data) => sendResponse(err, data, request, response));
 
-exports.deleteUser = (request, response) => UserModel.findByIdAndDelete(request.params._id, (err, data) => global.sendResponse(err, data, request, response));
+exports.deleteUser = (request, response) => UserModel.findByIdAndDelete(request.params._id, (err, data) => sendResponse(err, data, request, response));
