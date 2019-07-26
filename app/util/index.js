@@ -8,7 +8,10 @@ function setupDatabase() {
 };
 
 function sendResponse(error, data, request, response) {
-    if(error || data===null || data===undefined) response.status(500).json({ error: error });
+    if(error || data===null || data===undefined) {
+        response.status(500).json({ error: error });
+        console.log('[ERROR]: '+request.path+' = '+error);
+    }
     else response.status(200).json(data);
 };
 

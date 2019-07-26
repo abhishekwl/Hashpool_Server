@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+//LOCAL
+const SALT_WORK_FACTOR = 16;
 
 const userSchema = mongoose.Schema({
-    _id: { type: String, required: true, default: null, trim: true },
-    name: { type: String, required: true, default: null, trim: true,  },
+    name: { type: String, required: true, default: null, trim: true },
+    password: { type: String, required: true, default: null },
     email: { type: String, required: true, default: null, trim: true },
     phone: { type: String, required: false, default: null, trim: true, maxlength: 15 },
     image: { type: String, required: false, default: null, trim: true },
@@ -17,5 +20,22 @@ const userSchema = mongoose.Schema({
         default: { latitude: -1, longitude: -1 }
     }
 });
+
+userSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, SALT_WORK_FACTOR, (err, hash) => {
+        if(err) return next(err);
+        else {
+            user.password = hash;
+            next();
+        }
+    });
+});
+
+userSchema.methods.isPasswordValid = function(candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, (err, isValid) => {
+        if(err) return callback(err);
+        else callback(null, isValid);
+    });
+};
 
 module.exports = mongoose.model('user', userSchema);
